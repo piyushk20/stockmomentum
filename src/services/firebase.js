@@ -61,6 +61,9 @@ export const saveAnalysis = async (data) => {
 
 export const addToWatchlist = async (stockSymbol) => {
     try {
+        if (!stockSymbol || typeof stockSymbol !== 'string' || stockSymbol.length > 20) {
+            throw new Error("Invalid stock symbol format");
+        }
         const docRef = await addDoc(collection(db, "watchlist"), {
             symbol: stockSymbol,
             addedAt: serverTimestamp(),
