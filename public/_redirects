@@ -1,1 +1,2 @@
+/api/yahoo/*  https://query1.finance.yahoo.com/:splat  200
 /*    /index.html   200
