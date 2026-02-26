@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    background-color: var(--color-slate-100);
+    color: var(--color-slate-900);
+    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  }
+}
+
+@layer components {
+  .card {
+    background-color: white;
+    border-radius: 1rem;
+    /* rounded-2xl */
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    /* shadow-sm */
+    border: 1px solid #f1f5f9;
+    /* border-slate-100 */
+    transition: box-shadow 300ms;
+  }
+
+  .card:hover {
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    /* shadow-md */
+  }
+
+  .btn-primary {
+    background-color: #2563eb;
+    /* bg-blue-600 */
+    color: white;
+    font-weight: 500;
+    border-radius: 0.75rem;
+    /* rounded-xl */
+    padding: 0.625rem 1.25rem;
+    /* px-5 py-2.5 */
+    transition: all 150ms;
+  }
+
+  .btn-primary:hover {
+    background-color: #1d4ed8;
+    /* bg-blue-700 */
+  }
+
+  .btn-primary:active {
+    transform: scale(0.95);
+  }
+
+  .badge {
+    padding: 0.25rem 0.625rem;
+    /* px-2.5 py-1 */
+    border-radius: 9999px;
+    /* rounded-full */
+    font-size: 0.75rem;
+    /* text-xs */
+    font-weight: 700;
+    letter-spacing: 0.025em;
+    /* tracking-wide */
+  }
+}

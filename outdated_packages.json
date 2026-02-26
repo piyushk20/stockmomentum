@@ -1,0 +1,100 @@
+{
+  "@eslint/js": {
+    "current": "9.39.1",
+    "wanted": "9.39.3",
+    "latest": "10.0.1",
+    "dependent": "stockmomentum",
+    "location": "C:\\Users\\HP\\stockmomentum\\node_modules\\@eslint\\js"
+  },
+  "@tailwindcss/postcss": {
+    "current": "4.1.17",
+    "wanted": "4.2.1",
+    "latest": "4.2.1",
+    "dependent": "stockmomentum",
+    "location": "C:\\Users\\HP\\stockmomentum\\node_modules\\@tailwindcss\\postcss"
+  },
+  "@types/react": {
+    "current": "19.2.7",
+    "wanted": "19.2.14",
+    "latest": "19.2.14",
+    "dependent": "stockmomentum",
+    "location": "C:\\Users\\HP\\stockmomentum\\node_modules\\@types\\react"
+  },
+  "@vitejs/plugin-react": {
+    "current": "5.1.1",
+    "wanted": "5.1.4",
+    "latest": "5.1.4",
+    "dependent": "stockmomentum",
+    "location": "C:\\Users\\HP\\stockmomentum\\node_modules\\@vitejs\\plugin-react"
+  },
+  "autoprefixer": {
+    "current": "10.4.22",
+    "wanted": "10.4.24",
+    "latest": "10.4.24",
+    "dependent": "stockmomentum",
+    "location": "C:\\Users\\HP\\stockmomentum\\node_modules\\autoprefixer"
+  },
+  "eslint": {
+    "current": "9.39.1",
+    "wanted": "9.39.3",
+    "latest": "10.0.2",
+    "dependent": "stockmomentum",
+    "location": "C:\\Users\\HP\\stockmomentum\\node_modules\\eslint"
+  },
+  "eslint-plugin-react-refresh": {
+    "current": "0.4.24",
+    "wanted": "0.4.26",
+    "latest": "0.5.2",
+    "dependent": "stockmomentum",
+    "location": "C:\\Users\\HP\\stockmomentum\\node_modules\\eslint-plugin-react-refresh"
+  },
+  "firebase": {
+    "current": "12.6.0",
+    "wanted": "12.9.0",
+    "latest": "12.9.0",
+    "dependent": "stockmomentum",
+    "location": "C:\\Users\\HP\\stockmomentum\\node_modules\\firebase"
+  },
+  "globals": {
+    "current": "16.5.0",
+    "wanted": "16.5.0",
+    "latest": "17.3.0",
+    "dependent": "stockmomentum",
+    "location": "C:\\Users\\HP\\stockmomentum\\node_modules\\globals"
+  },
+  "lucide-react": {
+    "current": "0.555.0",
+    "wanted": "0.555.0",
+    "latest": "0.575.0",
+    "dependent": "stockmomentum",
+    "location": "C:\\Users\\HP\\stockmomentum\\node_modules\\lucide-react"
+  },
+  "react": {
+    "current": "19.2.0",
+    "wanted": "19.2.4",
+    "latest": "19.2.4",
+    "dependent": "stockmomentum",
+    "location": "C:\\Users\\HP\\stockmomentum\\node_modules\\react"
+  },
+  "react-dom": {
+    "current": "19.2.0",
+    "wanted": "19.2.4",
+    "latest": "19.2.4",
+    "dependent": "stockmomentum",
+    "location": "C:\\Users\\HP\\stockmomentum\\node_modules\\react-dom"
+  },
+  "tailwindcss": {
+    "current": "4.1.17",
+    "wanted": "4.2.1",
+    "latest": "4.2.1",
+    "dependent": "stockmomentum",
+    "location": "C:\\Users\\HP\\stockmomentum\\node_modules\\tailwindcss"
+  },
+  "vite": {
+    "current": "7.2.4",
+    "wanted": "7.3.1",
+    "latest": "7.3.1",
+    "dependent": "stockmomentum",
+    "location": "C:\\Users\\HP\\stockmomentum\\node_modules\\vite"
+  }
+}

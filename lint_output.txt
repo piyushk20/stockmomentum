@@ -1,0 +1,37 @@
+
+> stockmomentum@0.0.0 lint
+> eslint .
+
+
+C:\Users\HP\stockmomentum\src\components\StockChart.jsx
+  87:44  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+  85 |                             tickFormatter={(value) => value.toLocaleString()}
+  86 |                         />
+> 87 |                         <Tooltip content={<CustomTooltip />} />
+     |                                            ^^^^^^^^^^^^^ This component is created during render
+  88 |                         
+  89 |                         <Line type="monotone" dataKey="sma200" stroke="#f43f5e" strokeWidth={1.5} dot={false} opacity={0.7} />
+  90 |                         <Line type="monotone" dataKey="sma50" stroke="#eab308" strokeWidth={1.5} dot={false} opacity={0.8} />
+
+  24 |
+  25 |     // Custom tooltip to format currency
+> 26 |     const CustomTooltip = ({ active, payload, label }) => {
+     |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 27 |         if (active && payload && payload.length) {
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 28 |             return (
+     ΓÇª
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 47 |         return null;
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 48 |     };
+     | ^^^^^^ The component is created during render here
+  49 |
+  50 |     return (
+  51 |         <div className="card p-6 mb-8 mt-8 border-t-4 border-t-blue-600">  react-hooks/static-components
+
+Γ£û 1 problem (1 error, 0 warnings)
+
