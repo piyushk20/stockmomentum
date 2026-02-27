@@ -28,7 +28,7 @@ export const STOCK_LIST = [
                 "label": "NIFTY BANK"
             },
             {
-                "value": "^CRSLDX",
+                "value": "^CNX500",
                 "label": "NIFTY 500"
             }
         ]
@@ -2169,18 +2169,6 @@ export const STOCK_LIST = [
             {
                 "value": "^CNXINFRA",
                 "label": "NIFTY INFRA"
-            },
-            {
-                "value": "^CRSLDX",
-                "label": "NIFTY 200"
-            },
-            {
-                "value": "^CNXMCAP",
-                "label": "NIFTY MIDCAP 100"
-            },
-            {
-                "value": "^CNXSCAP",
-                "label": "NIFTY SMALLCAP 100"
             }
         ]
     },

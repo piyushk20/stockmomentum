@@ -37,38 +37,53 @@ export const scanMarket = async (symbols, onProgress) => {
                     type: symbol.startsWith('^') ? 'Index' : 'Stock'
                 });
 
-                // 2. EMA 9/20 Bullish Crossover (Today)
+                // 2. EMA 9/20 Bullish Crossover (Recent 5 days)
                 const ema9Array = calculateEMAArray(closes, 9);
                 const ema20Array = calculateEMAArray(closes, 20);
 
-                const curr9 = ema9Array[ema9Array.length - 1];
-                const curr20 = ema20Array[ema20Array.length - 1];
-                const prev9 = ema9Array[ema9Array.length - 2];
-                const prev20 = ema20Array[ema20Array.length - 2];
+                let bullishDate = null;
+                for (let i = ema9Array.length - 1; i >= Math.max(1, ema9Array.length - 5); i--) {
+                    const curr9 = ema9Array[i];
+                    const curr20 = ema20Array[i];
+                    const prev9 = ema9Array[i - 1];
+                    const prev20 = ema20Array[i - 1];
 
-                if (prev9 <= prev20 && curr9 > curr20) {
+                    if (prev9 <= prev20 && curr9 > curr20) {
+                        bullishDate = new Date(timestamps[i] * 1000).toLocaleDateString();
+                        break;
+                    }
+                }
+
+                if (bullishDate) {
                     results.bullishCross.push({
                         symbol,
                         price: currentPrice,
-                        date: new Date(timestamps[timestamps.length - 1] * 1000).toLocaleDateString()
+                        date: bullishDate
                     });
                 }
 
-                // 3. Death Cross (50 SMA < 200 SMA) - Using SMA as per standard definition, or EMA if user prefers?
-                // User asked for "ema 50 crossing below ema 200"
+                // 3. Death Cross (50 EMA < 200 EMA) - Recent 5 days
                 const ema50Array = calculateEMAArray(closes, 50);
                 const ema200Array = calculateEMAArray(closes, 200);
 
-                const curr50 = ema50Array[ema50Array.length - 1];
-                const curr200 = ema200Array[ema200Array.length - 1];
-                const prev50 = ema50Array[ema50Array.length - 2];
-                const prev200 = ema200Array[ema200Array.length - 2];
+                let deathDate = null;
+                for (let i = ema50Array.length - 1; i >= Math.max(1, ema50Array.length - 5); i--) {
+                    const curr50 = ema50Array[i];
+                    const curr200 = ema200Array[i];
+                    const prev50 = ema50Array[i - 1];
+                    const prev200 = ema200Array[i - 1];
 
-                if (prev50 >= prev200 && curr50 < curr200) {
+                    if (prev50 >= prev200 && curr50 < curr200) {
+                        deathDate = new Date(timestamps[i] * 1000).toLocaleDateString();
+                        break;
+                    }
+                }
+
+                if (deathDate) {
                     results.deathCross.push({
                         symbol,
                         price: currentPrice,
-                        date: new Date(timestamps[timestamps.length - 1] * 1000).toLocaleDateString()
+                        date: deathDate
                     });
                 }
 

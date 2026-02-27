@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { scanMarket } from '../utils/scanner';
 import { STOCK_LIST } from '../data/stocks';
 import { formatCurrency } from '../utils/format';
+import { NIFTY_200, NIFTY_MIDCAP_100, NIFTY_SMALLCAP_100 } from '../data/indexConstituents';
 
 const MarketDashboard = ({ onStockSelect }) => {
     const [activeTab, setActiveTab] = useState('momentum');
@@ -14,21 +15,13 @@ const MarketDashboard = ({ onStockSelect }) => {
         setProgress(0);
 
         // Flatten stock list to get symbols
-        // We want Indices, Sectoral Indices, and Large Cap stocks
-        const indicesGroup = STOCK_LIST.find(g => g.label === 'Indices');
-        const sectoralIndicesGroup = STOCK_LIST.find(g => g.label === 'Sectoral Indices');
-        const nse100Group = STOCK_LIST.find(g => g.label === 'NSE 100 (Large Cap)');
-
-        const indices = indicesGroup ? indicesGroup.options : [];
-        const sectoralIndices = sectoralIndicesGroup ? sectoralIndicesGroup.options : [];
-        const nse100 = nse100Group ? nse100Group.options : [];
-
-        // Combine them (using .value for the symbol)
-        const symbolsToScan = [
-            ...indices.map(s => s.value),
-            ...sectoralIndices.map(s => s.value),
-            ...nse100.map(s => s.value)
-        ];
+        const indexConstituents = [...new Set([...NIFTY_200, ...NIFTY_MIDCAP_100, ...NIFTY_SMALLCAP_100])];
+        const symbolsToScan = [...new Set([
+            ...STOCK_LIST
+                .filter(group => group.label !== 'Global Stocks')
+                .flatMap(group => group.options.map(opt => opt.value)),
+            ...indexConstituents
+        ])];
 
         try {
             const data = await scanMarket(symbolsToScan, (p) => setProgress(p));
@@ -95,39 +88,91 @@ const MarketDashboard = ({ onStockSelect }) => {
                 )}
 
                 {results && activeTab === 'momentum' && (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        {/* Nifty 200 Category */}
                         <div>
-                            <h3 className="text-xs font-bold text-slate-400 mb-4 uppercase tracking-wider">Top 7 Stocks</h3>
+                            <div className="flex items-center gap-2 mb-4">
+                                <span className="p-1.5 bg-blue-100 text-blue-700 rounded-lg">
+                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                    </svg>
+                                </span>
+                                <h3 className="text-sm font-bold text-slate-700 uppercase tracking-wider">Nifty 200</h3>
+                            </div>
                             <div className="space-y-3">
-                                {results.momentum.filter(i => i.type === 'Stock').slice(0, 7).map((item, idx) => (
-                                    <div key={item.symbol} className="flex justify-between items-center p-4 bg-white border border-slate-100 rounded-xl hover:shadow-md hover:border-blue-100 cursor-pointer transition-all group" onClick={() => onStockSelect(item.symbol)}>
-                                        <div className="flex items-center gap-4">
-                                            <span className={`text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full ${idx < 3 ? 'bg-blue-100 text-blue-700' : 'bg-slate-100 text-slate-500'}`}>{idx + 1}</span>
-                                            <span className="font-bold text-slate-700 group-hover:text-blue-600 transition-colors">{item.symbol.replace('.NS', '')}</span>
+                                {results.momentum
+                                    .filter(item => NIFTY_200.includes(item.symbol))
+                                    .slice(0, 5)
+                                    .map((item, idx) => (
+                                        <div key={item.symbol} className="flex justify-between items-center p-3 bg-white border border-slate-100 rounded-xl hover:shadow-md hover:border-blue-100 cursor-pointer transition-all group" onClick={() => onStockSelect(item.symbol)}>
+                                            <div className="flex items-center gap-3">
+                                                <span className={`text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full ${idx < 3 ? 'bg-blue-100 text-blue-700' : 'bg-slate-100 text-slate-500'}`}>{idx + 1}</span>
+                                                <span className="text-sm font-bold text-slate-700 group-hover:text-blue-600 transition-colors">{item.symbol.replace('.NS', '')}</span>
+                                            </div>
+                                            <div className="text-right">
+                                                <div className="text-xs text-emerald-600 font-bold">+{item.momentum.toFixed(2)}%</div>
+                                                <div className="text-[10px] text-slate-400">{formatCurrency(item.symbol, item.price)}</div>
+                                            </div>
                                         </div>
-                                        <div className="text-right">
-                                            <div className="text-emerald-600 font-bold">+{item.momentum.toFixed(2)}%</div>
-                                            <div className="text-xs text-slate-400">{formatCurrency(item.symbol, item.price)}</div>
-                                        </div>
-                                    </div>
-                                ))}
+                                    ))}
                             </div>
                         </div>
+
+                        {/* Nifty Midcap 100 Category */}
                         <div>
-                            <h3 className="text-xs font-bold text-slate-400 mb-4 uppercase tracking-wider">Top 3 Indices</h3>
+                            <div className="flex items-center gap-2 mb-4">
+                                <span className="p-1.5 bg-indigo-100 text-indigo-700 rounded-lg">
+                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                    </svg>
+                                </span>
+                                <h3 className="text-sm font-bold text-slate-700 uppercase tracking-wider">Midcap 100</h3>
+                            </div>
                             <div className="space-y-3">
-                                {results.momentum.filter(i => i.type === 'Index').slice(0, 3).map((item, idx) => (
-                                    <div key={item.symbol} className="flex justify-between items-center p-4 bg-white border border-slate-100 rounded-xl hover:shadow-md hover:border-blue-100 cursor-pointer transition-all group" onClick={() => onStockSelect(item.symbol)}>
-                                        <div className="flex items-center gap-4">
-                                            <span className="text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full bg-indigo-100 text-indigo-700">{idx + 1}</span>
-                                            <span className="font-bold text-slate-700 group-hover:text-indigo-600 transition-colors">{item.symbol}</span>
+                                {results.momentum
+                                    .filter(item => NIFTY_MIDCAP_100.includes(item.symbol))
+                                    .slice(0, 5)
+                                    .map((item, idx) => (
+                                        <div key={item.symbol} className="flex justify-between items-center p-3 bg-white border border-slate-100 rounded-xl hover:shadow-md hover:border-indigo-100 cursor-pointer transition-all group" onClick={() => onStockSelect(item.symbol)}>
+                                            <div className="flex items-center gap-3">
+                                                <span className={`text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full ${idx < 3 ? 'bg-indigo-100 text-indigo-700' : 'bg-slate-100 text-slate-500'}`}>{idx + 1}</span>
+                                                <span className="text-sm font-bold text-slate-700 group-hover:text-indigo-600 transition-colors">{item.symbol.replace('.NS', '')}</span>
+                                            </div>
+                                            <div className="text-right">
+                                                <div className="text-xs text-emerald-600 font-bold">+{item.momentum.toFixed(2)}%</div>
+                                                <div className="text-[10px] text-slate-400">{formatCurrency(item.symbol, item.price)}</div>
+                                            </div>
                                         </div>
-                                        <div className="text-right">
-                                            <div className="text-emerald-600 font-bold">+{item.momentum.toFixed(2)}%</div>
-                                            <div className="text-xs text-slate-400">{formatCurrency(item.symbol, item.price)}</div>
+                                    ))}
+                            </div>
+                        </div>
+
+                        {/* Nifty Smallcap 100 Category */}
+                        <div>
+                            <div className="flex items-center gap-2 mb-4">
+                                <span className="p-1.5 bg-purple-100 text-purple-700 rounded-lg">
+                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                    </svg>
+                                </span>
+                                <h3 className="text-sm font-bold text-slate-700 uppercase tracking-wider">Smallcap 100</h3>
+                            </div>
+                            <div className="space-y-3">
+                                {results.momentum
+                                    .filter(item => NIFTY_SMALLCAP_100.includes(item.symbol))
+                                    .slice(0, 5)
+                                    .map((item, idx) => (
+                                        <div key={item.symbol} className="flex justify-between items-center p-3 bg-white border border-slate-100 rounded-xl hover:shadow-md hover:border-purple-100 cursor-pointer transition-all group" onClick={() => onStockSelect(item.symbol)}>
+                                            <div className="flex items-center gap-3">
+                                                <span className={`text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full ${idx < 3 ? 'bg-purple-100 text-purple-700' : 'bg-slate-100 text-slate-500'}`}>{idx + 1}</span>
+                                                <span className="text-sm font-bold text-slate-700 group-hover:text-purple-600 transition-colors">{item.symbol.replace('.NS', '')}</span>
+                                            </div>
+                                            <div className="text-right">
+                                                <div className="text-xs text-emerald-600 font-bold">+{item.momentum.toFixed(2)}%</div>
+                                                <div className="text-[10px] text-slate-400">{formatCurrency(item.symbol, item.price)}</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                ))}
+                                    ))}
                             </div>
                         </div>
                     </div>

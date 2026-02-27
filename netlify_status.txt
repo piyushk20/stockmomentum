@@ -1,0 +1,15 @@
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÉ
+ Current Netlify User Γöé
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÿ
+[32mName: [39m piyush kumar
+[32mEmail: [39mpurushvikumar@gmail.com
+[32mTeams: [39m
+  [32m- [39mmomentum stock India
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÉ
+ Netlify Project Info  Γöé
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÿ
+[32mCurrent project: [39mstockmomentumindia
+[32mAdmin URL: [39m      https://app.netlify.com/projects/stockmomentumindia
+[32mProject URL: [39m    https://stockmomentumindia.netlify.app
+[32mProject Id: [39m     549a2096-912a-426b-a37e-382a31682aac
+
