@@ -12,9 +12,20 @@ const firebaseConfig = {
     appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+let app;
+let db;
+
+try {
+  // Check if we have at least a Project ID to avoid immediate production crashes if VITE keys are missing
+  if (import.meta.env.VITE_FIREBASE_PROJECT_ID) {
+    app = initializeApp(firebaseConfig);
+    db = getFirestore(app);
+  } else {
+    console.warn("Firebase config missing (VITE_FIREBASE_PROJECT_ID not found). Data persistence features will be disabled.");
+  }
+} catch (error) {
+  console.error("Firebase initialization failed:", error);
+}
 
 
 import { z } from 'zod';
